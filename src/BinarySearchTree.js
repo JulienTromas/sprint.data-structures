@@ -4,7 +4,7 @@ class BinarySearchTree {
     this.left = null;
     this.right = null;
   }
-
+  // O(log n)
   insert(value) {
     let iterator = this;
     let insertedFlag = false;
@@ -26,7 +26,7 @@ class BinarySearchTree {
     }
     return this;
   }
-
+  // O(log n)
   contains(value) {
     let iterator = this;
     while (true) {
@@ -44,7 +44,7 @@ class BinarySearchTree {
       }
     }
   }
-
+  // O(n)
   traverseDepthFirstInOrder(callback) {
     function inOrder(callback, tree) {
       if (tree.left !== null) inOrder(callback, tree.left);
@@ -53,9 +53,8 @@ class BinarySearchTree {
     }
     inOrder(callback, this);
   }
-}
 
-/*
+  /*
 |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 |X                               X
 |X   Basic Requirements:         X
@@ -64,4 +63,15 @@ class BinarySearchTree {
 |X                               X
 |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 */
+  // O(n)
+  traverseDepthFirstPreOrder(callback) {
+    function inOrder(callback, tree) {
+      if (tree.left !== null) inOrder(callback, tree.left);
+      if (tree.right !== null) inOrder(callback, tree.right);
+      callback(tree);
+    }
+    inOrder(callback, this);
+  }
+}
+
 module.exports = { BinarySearchTree };

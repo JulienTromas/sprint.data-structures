@@ -12,7 +12,7 @@ class LinkedList {
       this.tail = this.head;
     }
   }
-
+  // O(1)
   appendToTail(value) {
     const newNode = new Node(value);
     if ("head" in this === false) {
@@ -23,19 +23,20 @@ class LinkedList {
     this.tail = newNode;
     return newNode;
   }
-
+  // O(1)
   removeHead() {
     const oldHead = this.head;
     this.head = this.head.next;
     return oldHead;
   }
-
+  // O(n)
   findNode(value) {
     let iterator = this.head;
-    do {
+    while (iterator);
+    {
       if (iterator.value === value) return iterator;
       iterator = iterator.next;
-    } while (iterator.next !== null);
+    }
     if (iterator.value === value) return iterator;
     return null;
   }
@@ -49,16 +50,16 @@ The following are part of the advanced requirements.
 Do not proceed until you are done with the basic
 requirements for ALL data structures in this exercise.
 */
-
+  // O(n)
   forEach(callback) {
     let iterator = this.head;
-    do {
+    while (iterator) {
       callback(iterator.value);
       iterator = iterator.next;
-    } while (iterator.next !== null);
+    }
     callback(iterator.value);
   }
-
+  // O(n)
   print() {
     let nodePrint = "";
     function addToNodePrint(value) {
@@ -67,39 +68,41 @@ requirements for ALL data structures in this exercise.
     this.forEach(addToNodePrint);
     return nodePrint.slice(0, -2);
   }
-
+  // O(1)
   insertHead(value) {
     const newHead = new Node(value);
     newHead.next = this.head;
     return (this.head = newHead);
   }
-
+  // O(n)
   insertAfter(refNode, value) {
     if (!refNode || !(refNode instanceof Node))
       throw new Error("Please supply a refNode");
     let iterator = this.head;
     const newNode = new Node(value);
-    do {
-      if (iterator === refNode) {
-        newNode.next = iterator.next;
-        iterator.next = newNode;
-        return newNode;
+    while (iterator) {
+      {
+        if (iterator === refNode) {
+          newNode.next = iterator.next;
+          iterator.next = newNode;
+          return newNode;
+        }
+        iterator = iterator.next;
       }
-      iterator = iterator.next;
-    } while (iterator.next !== null);
+    }
   }
-
+  // O(n)
   removeAfter(refNode) {
     if (!refNode) return;
     let iterator = this.head;
-    do {
+    while (iterator) {
       if (iterator === refNode) {
         const toRemove = refNode.next;
         refNode.next = refNode.next.next;
         return toRemove;
       }
       iterator = iterator.next;
-    } while (iterator.next !== null);
+    }
   }
 }
 
